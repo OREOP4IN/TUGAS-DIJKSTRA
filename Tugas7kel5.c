@@ -60,8 +60,8 @@ int idx_process(int n, int jarak_final[n], bool is_final[n]){
 int main (){
     char namafile_tanaman[max_len];
     // Input file tanaman
-    printf("Selamat datang di database kebun raya purwodadi.\n");
-    printf("Silahkan masukkan nama file database nama tanaman di kebun: ");
+    printf("Selamat datang di database stasiun.\n");
+    printf("Silahkan masukkan nama file database nama kota-kota stasiun: ");
     scanf("%s",&namafile_tanaman);
     FILE* fp_tanaman = fopen(namafile_tanaman,"r");
 
@@ -75,10 +75,10 @@ int main (){
         strcpy(nama_tanaman[n_tanaman],token);
         n_tanaman += 1;
     }
-    printf("Pembacaan nama tanaman di kebun raya purwodadi berhasil.\n");
-    printf("Terdapat %d tanaman di lokasi yang berbeda\n",n_tanaman);
+    printf("Pembacaan nama kota-kota stasiun berhasil.\n");
+    printf("Terdapat %d stasiun di kota yang berbeda\n",n_tanaman);
     // Input graph (berisi jarak masing-masing tanaman). -1 atau 2147483647=INT_MAX menyatakan tak hingga.
-    printf("Silahkan masukkan nama file yang berisi jarak masing-masing tanaman: ");
+    printf("Silahkan masukkan nama file yang berisi jarak masing-masing stasiun: ");
     char namafile_graph[max_len];
     scanf("%s",&namafile_graph);
     // File eksternal berbentuk matriks segitiga bawah
@@ -100,20 +100,20 @@ int main (){
         }
         j+=1;
     }
-    printf("Pembacaan jarak antar tanaman berhasil dilakukan.\n\n");
+    printf("Pembacaan jarak antar stasiun berhasil dilakukan.\n\n");
     printgraph(n_tanaman,graph_tanaman);
     char progress='y';
     while(progress=='y'){
         // Pembacaan vertex awal dan akhir
         int idx_awal, idx_tujuan;
-        printf("\nBerikut adalah daftar tamanan yang berada di Kebun Raya Purwodadi.\n");
+        printf("\nBerikut adalah daftar stasiun-stasiun.\n");
         for(int i=1;i<=n_tanaman;i++){
             printf("%d. %s\n",i,nama_tanaman[i-1]);
         }
-        printf("\nPilih salah satu tanaman sebagai posisi awal (Cukup ketik angka saja): ");
+        printf("\nPilih salah satu stasiun sebagai posisi awal (Cukup ketik angka saja): ");
         scanf(" %d",&idx_awal);
         idx_awal-=1;
-        printf("Pilih salah satu tanaman sebagai tujuan (Cukup ketik angka saja): ");
+        printf("Pilih salah satu stasiun sebagai tujuan (Cukup ketik angka saja): ");
         scanf(" %d",&idx_tujuan);
         idx_tujuan-=1;
         int jarak_final[n_tanaman]; //Jarak akhir ke masing2 pohon, akan di update terus sesuai jarak yang ditemukan
@@ -165,13 +165,13 @@ int main (){
             }
             idx_now = idx_process(n_tanaman,jarak_final,is_final);
         }
-        printf("\nTanaman yang harus dilalui untuk mencapai %s dengan posisi awal %s adalah: \n",nama_tanaman[idx_tujuan],nama_tanaman[idx_awal]);
+        printf("\nStasiun yang harus dilalui untuk mencapai %s dengan posisi awal %s adalah: \n",nama_tanaman[idx_tujuan],nama_tanaman[idx_awal]);
         for(int i=0;i<idx_dilalui[idx_tujuan];i++){
             if(list_dilalui[idx_tujuan][i]!=int_max){
                 printf("%d. %s\n",i+1,nama_tanaman[list_dilalui[idx_tujuan][i]]);
             }
         }
-        printf("\nJarak antara kedua tanaman tersebut adalah %d meter\n\n",jarak_final[idx_tujuan]);
+        printf("\nJarak antara kedua stasiun tersebut adalah %d meter\n\n",jarak_final[idx_tujuan]);
         /* // Digunakan untuk debugging
         printf("Jarak final: %d\n",jarak_final[idx_tujuan]);
         printf("Indeks Tujuan: %d\n",idx_tujuan);
@@ -185,7 +185,7 @@ int main (){
             }
             printf("\n");
         }*/
-        printf("Apakah anda masih ingin mengelilingi Kebun Raya Purwodadi? [y/n]: ");
+        printf("Apakah anda masih ingin mengelilingi Indonesia? [y/n]: ");
         scanf(" %c",&progress);
     }
 }
